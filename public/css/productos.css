@@ -1,0 +1,29 @@
+.nav-item {
+    box-sizing: border-box;
+    color: #C49B63;
+    cursor: pointer;
+    font-family: Nunito, sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 20.8px;
+    text-transform: uppercase;
+    transition:  0.15s ease-in-out;
+}
+
+.nav-item a[active=active] {
+    color: #fff3e1;
+}
+.producto-show h2{
+    font-size: 22px;
+    font-weight: 600;
+    padding-left: 12px;
+}
+
+.producto-show h3{
+    font-size: 18px;
+    font-weight: 600;
+}
+.producto-show h6{
+    font-size: 12px;
+    font-weight: 300;
+}
