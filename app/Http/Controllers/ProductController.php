@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductoRequest;
 use Illuminate\Support\Facades\DB;
+
+  function actualizaCatgs($prMax, $llave){
+        DB::table('categoria_product')->insert([
+            'product_id' => $prMax,
+            'categoria_id' => $llave,
+        ]);
+    }
 class ProductController extends Controller
 {
     public function main()
@@ -21,18 +29,18 @@ class ProductController extends Controller
 
     public function create()
     {
-        $productos =  Product::all();
+        $productos = Product::all();
         return view('product.create', compact('productos'));
     }
 
-    public function store(Request $request, ProductoRequest $productoRequest )
+    public function store(Request $request, ProductoRequest $productoRequest)
     {
         $product = new Product;
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
+        $product->name = trim($request->name);
+        $product->description = trim($request->description);
+        $product->price = trim($request->price);
         if ($request->file_img) {
-            $fileName = time().'_'. $request->file_img->getClientOriginalName();
+            $fileName = time() . '_' . $request->file_img->getClientOriginalName();
             $request->file_img->move(public_path('images/productos'), $fileName);
         } elseif ($request->files_select != $request->image) {
             $fileName = $request->files_select;
@@ -40,19 +48,41 @@ class ProductController extends Controller
             $fileName = $request->image;
         }
 
-        $product->image = $fileName;
-        $product->save();
+         $product->image = $fileName;
+         $product->save();
 
-       foreach($request->categoria as $cat => $key){
-        $pro =  Product::max('id') + 1;
-            DB::table('categoria_product')->insert([
-                'product_id' => Product::max('id') + 1,
-                'categoria_id' => $key,
-            ]);
-      }
+        $prodMax = Product::max('id');
+        if ($request->new_categ) {
+           $nameNewCat = trim($request->new_categ);
+           $insertarCat = true;
 
-        return redirect()->route('product.index')
-        ->with('success', 'Producto CREADO successfully');
+           $allCatgs = Categoria::all();
+           foreach($allCatgs as $allCatg){
+                $nameCatg = $allCatg->name;
+                if($nameNewCat ==  $allCatg->name){
+                   $insertarCat = false;
+                }
+           }
+            if($insertarCat){
+                Categoria::insert([
+                    'name' => $nameNewCat,
+                ]);
+                actualizaCatgs($prodMax, Categoria::max('id'));
+            }
+        }
+        if($request->categoria){
+            foreach ($request->categoria as $cat => $key) {
+                 actualizaCatgs($prodMax, $key);
+                // DB::table('categoria_product')->insert([
+                //     'product_id' => Product::max('id'),
+                //     'categoria_id' => $key,
+                // ]);
+                //dd($key);
+            }
+        }
+
+         return redirect()->route('product.index')
+             ->with('success', 'Producto CREADO successfully');
 
     }
 
@@ -69,11 +99,11 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-         $product = Product::find($product->id);
-         $borrar = false;
-        // $fileName = $product->image;
+        $product = Product::find($product->id);
+        $borrar = false;
+        $fileName_ant = $product->image;
         if ($request->file_img) {
-            $fileName = time().'_'. $request->file_img->getClientOriginalName();
+            $fileName = time() . '_' . $request->file_img->getClientOriginalName();
             $request->file_img->move(public_path('images/productos'), $fileName);
             $borrar = true;
         } elseif ($request->files_select != $request->image) {
@@ -83,37 +113,41 @@ class ProductController extends Controller
             $fileName = $request->image;
             $borrar = true;
         }
-       // $borrar = true;
-       /* if ($product->image != $fileName && strlen($request->files_select)) {
-            $productos = Product::all();
-            foreach($productos as $pro){
-                if( $pro->image == $product->image AND $pro->id == $product->id){
-                    $borrar = false;
-                    //dd($product->image);
-                }
-            }*/
-            if($borrar && $product->image != $fileName ){
-               // unlink(public_path('images/productos/') . $product->image);
-            }
+        //dd($fileName_ant);
+        $fileNombre = $fileName ? $fileName : $fileName_ant;
+        // $borrar = true;
+        /* if ($product->image != $fileName && strlen($request->files_select)) {
+             $productos = Product::all();
+             foreach($productos as $pro){
+                 if( $pro->image == $product->image AND $pro->id == $product->id){
+                     $borrar = false;
+                     //dd($product->image);
+                 }
+             }*/
+        if ($borrar && $product->image != $fileName) {
+            // unlink(public_path('images/productos/') . $product->image);
+        }
         //}
 
         $product->update($request->all());
-        $product->image = $fileName;
+        $product->image = $fileNombre;
         $product->save();
-         DB::table('categoria_product')
-                      ->where('product_id', $product->id)
-                      ->delete();
-        $laId=[];
+
+        //? Categorias
+        DB::table('categoria_product')
+            ->where('product_id', $product->id)
+            ->delete();
+        $laId = [];
         //foreach($product->categorias as $catego ){
-        foreach($request->categoria as $catego){
+        foreach ($request->categoria as $catego) {
             DB::table('categoria_product')->insert([
                 'product_id' => $product->id,
                 'categoria_id' => $catego,
             ]);
 
-       //     $laId[] =  $catego;//->id . ' -- '. $catego->name.' -- '.$product->id;
+            //     $laId[] =  $catego;//->id . ' -- '. $catego->name.' -- '.$product->id;
         }
-      //  dd($laId);
+        //  dd($laId);
         return redirect()->route('product.index')
             ->with('success', 'producto ACTUALIZADO successfully');
     }
@@ -124,7 +158,8 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
-    public function prueba(Product $product){
+    public function prueba(Product $product)
+    {
         return view('product.prueba', compact('product'));
     }
 }

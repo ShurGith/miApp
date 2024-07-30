@@ -8,10 +8,10 @@
 @include('product.partials.edit-create')
 @section('contenido')
 	<div class="flex w-full items-center justify-center text-white">
-		<form action="{{ route('product.store') }}" class="mb-2 mt-8 flex flex-col gap-6" enctype="multipart/form-data"
+		<form action="{{ route('product.store') }}" class="mb-2 flex flex-col gap-6" enctype="multipart/form-data"
 			method="POST">
 			@csrf
-            <div class="flex flex-col gap-2 pt-10">
+            <div class="w-1/3 flex flex-col gap-2 pt-10">
 				<label for="name" htmlFor="remember">Nombre</label>
 				<input class="rounded-md border bg-transparent" id="name" name="name" type="text" value= "">
 				@error('name')
@@ -46,8 +46,8 @@
 					<input class="rounded-md border bg-transparent" id="price" name="price" type="text" value= "">
 				</div>
 				<div class="flex flex-col gap-4">
-					<label for="categ">Categoría</label>
-					<input class="rounded-md border bg-transparent" id="categ" name="categ" type="text" value= "">
+					<label for="new_categ">Categoría</label>
+					<input class="rounded-md border bg-transparent" id="categ" name="new_categ" type="text" value= "">
 				</div>
 				@yield('categorias-crear')
 			</div>

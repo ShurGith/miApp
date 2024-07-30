@@ -13,8 +13,8 @@
 			enctype="multipart/form-data" method="post">
 			@csrf
 			@method('PUT')
-			<div class="flex w-full items-center justify-between">
-				<div class="flex w-4/12 flex-col gap-2 pt-10">
+			<div class="flex w-full items-start justify-between">
+				<div class="flex w-4/12 flex-col gap-2">
 					<label for="name" htmlFor="remember">Nombre</label>
 					<input class="rounded-md border bg-transparent" id="name" name="name" type="text"
 						value= "{{ $product->name }}">
@@ -29,15 +29,14 @@
 						</div>
 					@enderror
 				</div>
-				<div class="flex w-2/12 flex-col gap-2 pt-10">
+				<div class="flex w-2/12 flex-col gap-2">
 					<label for="price">Precio</label>
 					<input class="rounded-md border bg-transparent" id="price" name="price" type="text"
 						value= "{{ $product->price }}">
 				</div>
-				<div class="flex w-5/12 justify-center pl-10">
-					<div alt="{{ $product->name }}" class="h-40 w-40 rounded-md border bg-contain bg-no-repeat"
-						style="background-image: url({{ asset('images/productos/' . $product->image) }})"></div>
-				</div>
+				{{-- <div class="flex w-5/12 justify-center pl-10"> --}}
+						<img class="w-40 rounded-md border" src="{{ asset('images/productos/' . $product->image) }}" alt="{{ $product->name }}">
+				{{-- </div> --}}
 			</div>
 			<div class="flex w-11/12 flex-col gap-2 pt-10">
 				<label for="description" htmlFor="remember">Descripción</label>
@@ -56,8 +55,8 @@
 			</div>
 			<div class="flex w-11/12 justify-evenly pt-10">
 				<div class="flex flex-col gap-4">
-					<label for="categ">Categoría</label>
-					<input class="rounded-md border bg-transparent" id="categ" name="categ" type="text"
+					<label for="new_categ">Categoría</label>
+					<input class="rounded-md border bg-transparent" id="new_categ" name="new_categ" type="text"
 						value= "{{ $product->category }}">
 				</div>
 				@yield('categorias')
