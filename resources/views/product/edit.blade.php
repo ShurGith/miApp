@@ -8,8 +8,8 @@
 @include('product/partials/edit-create')
 
 @section('contenido')
-	<div class="flex w-8/12 items-center justify-center text-white border rounded-lg">
-		<form action="{{ route('product.update', $product->id) }}" class="mb-2 mt-8 flex w-8/12 flex-col gap-4"
+	<div class="flex w-full items-center justify-center text-white">
+		<form action="{{ route('product.update', $product->id) }}" class="mb-2 flex flex-col gap-6"
 			enctype="multipart/form-data" method="post">
 			@csrf
 			@method('PUT')

@@ -73,11 +73,6 @@ class ProductController extends Controller
         if($request->categoria){
             foreach ($request->categoria as $cat => $key) {
                  actualizaCatgs($prodMax, $key);
-                // DB::table('categoria_product')->insert([
-                //     'product_id' => Product::max('id'),
-                //     'categoria_id' => $key,
-                // ]);
-                //dd($key);
             }
         }
 
@@ -137,17 +132,10 @@ class ProductController extends Controller
         DB::table('categoria_product')
             ->where('product_id', $product->id)
             ->delete();
-        $laId = [];
-        //foreach($product->categorias as $catego ){
-        foreach ($request->categoria as $catego) {
-            DB::table('categoria_product')->insert([
-                'product_id' => $product->id,
-                'categoria_id' => $catego,
-            ]);
 
-            //     $laId[] =  $catego;//->id . ' -- '. $catego->name.' -- '.$product->id;
-        }
-        //  dd($laId);
+        foreach ($request->categoria as $catego) {
+            actualizaCatgs($product->id, $catego);
+        };
         return redirect()->route('product.index')
             ->with('success', 'producto ACTUALIZADO successfully');
     }

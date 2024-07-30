@@ -56,7 +56,7 @@
 
 @section('imagenes')
 	<div class="flex flex-col gap-2">
-		<label for="files_select" htmlFor="remember">Disponibles</label>
+		<label for="files_select" htmlFor="remember">Imágenes Disponibles</label>
 		<select class="rounded-md border bg-transparent"
 			id="files_select" name="files_select">
             <option value="" enabled=false>Selecciona</option>
@@ -65,4 +65,9 @@
 			@endforeach
 		</select>
 	</div>
+	<div class="overflow-hidden h-60">
+	<img id="eventual" class="w-60 max-w-60" src="{{ asset('images/default-imagen.svg') }}">
+	</div>
 @endsection
+
+<script src="{{ asset('js/productos.js') }}"></script>
