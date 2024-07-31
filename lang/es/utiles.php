@@ -17,4 +17,8 @@
         'newImage' => 'Subir Nueva Imagen',
         'uploadImage' => 'Subir Imagen',
         'uploadedImage' => 'Imagen subida correctamente',
+        'infoEncontrado' => 'ATENCION - acción sin procesar',
+        'datoEncontrado' => 'Se ha encontrado, por lo menos, un producto que tiene asociada esta imagen.',
+        'imgDelSuccess'=> 'Imagen Eliminada Correctamente',
+        'IgualDelete'=> 'Eliminar Igualmente',
     ];

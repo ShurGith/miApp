@@ -37,3 +37,4 @@ Route::get('/categoria/index', [CategoriaController::class, 'index'])->name('cat
 Route::put('/categoria/update', [CategoriaController::class, 'update'])->name('catUpdate');
 Route::put('/categoria/imagedelete', [CategoriaController::class, 'imageDelete'])->name('imageDelete');
 Route::put('/categoria/imageupload', [CategoriaController::class, 'imageUpload'])->name('imageUpload');
+Route::put('/categoria/imgDelSeg', [CategoriaController::class, 'imgDelSeg'])->name('imgDelSeg');

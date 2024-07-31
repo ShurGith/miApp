@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,23 +46,28 @@ class CategoriaController extends Controller
         return redirect()->route('catIndex')
             ->with('success', $addMsj . $delMsj);
     }
-    public function imageDelete(){
-
-
-        return redirect()->route('catIndex')
-            ->with('success', __('utiles.uploadedImage'));
+    public function imageDelete(Request $request){
+        $products = Product::where('image', $request->files_select)->get();
+        if(count($products)>0){
+            $data =[  'imagen' => $request->files_select, ];
+            session()->flash('postData', $data);
+            return redirect()->route('catIndex')->with('encontrados', 'Encontrados');
+        }
+         unlink(public_path('images/productos/') . $request->files_select);
+        return redirect()->route('catIndex')->with('success', __('utiles.imgDelSuccess'));
 
     }
-    public function fileUpload(Request $request){
-        $fileName = "wxyz".time() . '_' . $request->file_subida->getClientOriginalName();
+
+    public function imgDelSeg(Request $request){
+        unlink(public_path('images/productos/') . $request->archivo);
+         return redirect()->route('catIndex')->with('success', __('utiles.imgDelSuccess'));
+    }
+    public function imageUpload(Request $request){
+        $pretime = "xy_".substr(time(), -5);
+        $prename = substr($request->file_subida->getClientOriginalName(),-10);
+        $fileName = $pretime. '_'. $prename;
         $request->file_subida->move(public_path('images/productos'), $fileName);
-
-        // if ($borrar && $product->image != $fileName) {
-        //     // unlink(public_path('images/productos/') . $product->image);
-        // }
-
-        return redirect()->route('catIndex')
-            ->with('success',__('utiles.uploadedImage'));
+       return redirect()->route('catIndex')->with('success',__('utiles.uploadedImage'));
     }
 
 

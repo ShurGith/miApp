@@ -17,4 +17,8 @@
         'newImage' => 'Upload New Image',
         'uploadImage'  => 'Upload Image',
         'uploadedImage' => 'New Image Uploaded',
+        'infoEncontrado' => 'No Application Processed',
+        'datoEncontrado' => 'At least one product has been found that has this image associated with it',
+        'imgDelSuccess' => 'Image Successfully Deleted',
+        'IgualDelete'=> 'Still delete',
     ];

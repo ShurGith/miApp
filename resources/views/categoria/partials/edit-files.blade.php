@@ -14,13 +14,13 @@
 					    <button class="btn btn-primary text-lg"	type="submit">{{ __('utiles.deleteSelected') }}</button>
 				    </div>
 				</div>
-                 </form>
+            </form>
         <div class="mb-2 flex flex-col gap-4 rounded border border-white p-4">
 			<h3 class="text-lg font-bold mb-2">{{ __('utiles.newImage') }}</h3>
-			<form action="{{ route('imageUpload') }}" class="flex flex-col gap-6 p-2" method="post">
+			<form action="{{ route('imageUpload') }}" class="flex flex-col gap-6 p-2" method="post" enctype="multipart/form-data">
 				@csrf
 				@method('PUT')
-				<input type="file" name="file_subida" class="ml-20 file-input file-input-bordered w-full max-w-xs" />
+				<input type="file" name="file_subida" id="file_subida" class="ml-20 file-input file-input-bordered w-full max-w-xs" />
 				<div class="flex w-full items-center justify-around">
 					<button class="btn btn-primary text-lg"	type="submit">{{ __('utiles.uploadImage') }}</button></button>
 				</div>
