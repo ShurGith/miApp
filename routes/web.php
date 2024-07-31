@@ -35,3 +35,5 @@ Route::get('/product/prueba/{product}', [ProductController::class,'prueba'])->na
 
 Route::get('/categoria/index', [CategoriaController::class, 'index'])->name('catIndex');
 Route::put('/categoria/update', [CategoriaController::class, 'update'])->name('catUpdate');
+Route::put('/categoria/imagedelete', [CategoriaController::class, 'imageDelete'])->name('imageDelete');
+Route::put('/categoria/imageupload', [CategoriaController::class, 'imageUpload'])->name('imageUpload');

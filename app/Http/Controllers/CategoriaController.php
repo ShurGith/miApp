@@ -24,6 +24,7 @@ class CategoriaController extends Controller
                     ->where('categoria_id', $categ->id)
                     ->delete();
                 $count++;
+            }
         }
 
         if ($request->new_catg) {
@@ -32,7 +33,7 @@ class CategoriaController extends Controller
             ]);
             $mensajeAdd = __('utiles.categAddSuccess');
         }
-       $addMsj =  isset($mensajeAdd) ? $mensajeAdd . ' <br> ' : "";
+        $addMsj =  isset($mensajeAdd) ? $mensajeAdd . ' <br> ' : "";
         $delMsj="";
         if($count == 1){
             $delMsj =  __('utiles.categDelSuccess');
@@ -42,6 +43,26 @@ class CategoriaController extends Controller
             $delMsj = __('utiles.categNoChanges');
         }
         return redirect()->route('catIndex')
-            ->with('success', $addMsj . $delMsj  );
+            ->with('success', $addMsj . $delMsj);
     }
+    public function imageDelete(){
+
+
+        return redirect()->route('catIndex')
+            ->with('success', __('utiles.uploadedImage'));
+
+    }
+    public function fileUpload(Request $request){
+        $fileName = "wxyz".time() . '_' . $request->file_subida->getClientOriginalName();
+        $request->file_subida->move(public_path('images/productos'), $fileName);
+
+        // if ($borrar && $product->image != $fileName) {
+        //     // unlink(public_path('images/productos/') . $product->image);
+        // }
+
+        return redirect()->route('catIndex')
+            ->with('success',__('utiles.uploadedImage'));
+    }
+
+
 }
