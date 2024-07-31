@@ -8,18 +8,20 @@
 	// use Illuminate\Support\Facades\DB;
     use App\Models\Categoria;
     $categs = Categoria::orderBy('name', 'asc')->pluck('name', 'id');
-    $a = 0
+    $a = 0;
+    $num = isset($dashboard) ? 8 : 3;
 @endphp
 @section('categorias-crear')
     <div class="flex flex-col gap-2">
-        <label for="files_select" htmlFor="remember">Categorías</label>
+        <label class="{{ isset($dashboard)? 'hidden':'' }}"" for="files_select" htmlFor="remember">Categorías</label>
             <div class="flex items-center justify-start gap-8 pl-8">
             @foreach ($categs as $id => $name )
             @php
                $a++;
             @endphp
-                <label class="cursor-pointer"><input class="cursor-pointer rounded mr-2" name="categoria[]" type="checkbox" value="{{ $id}}">{{ ucwords($name)  }}</label>
-            @if($a%3 == 0)
+                <label class="cursor-pointer"><input class="cursor-pointer rounded mr-2" name="categoria[]" type="checkbox"
+                    {{ isset($dashboard) ?  "checked" : '' }} value="{{ $id}}">{{ ucwords($name) }}</label>
+            @if($a%$num == 0)
                </div>
                <div class="flex items-center justify-start gap-8 pl-8">
             @endif
@@ -34,16 +36,10 @@
             <label for="files_select" htmlFor="remember">Categorías</label>
             <div class="flex items-center justify-start gap-8 pl-8">
             @foreach ($categs as $id => $name )
-                @php
-                   $a++;
-                @endphp
-                    <label class="cursor-pointer"><input class="cursor-pointer rounded mr-2" name="categoria[]" type="checkbox" value="{{ $id }}"
-                        @foreach ( $product->categorias as $catego )
-                            @if($catego->id == $id)
-                                @checked(true)
-                            @endif
-                        @endforeach
-                >{{ ucwords($name) }}</label>
+                @php   $a++; @endphp
+                    <label class="cursor-pointer"><input class="cursor-pointer rounded mr-2" name="categoria[]" type="checkbox"
+                    @foreach ( $product->categorias as $catego )@if($catego->id == $id)  @checked(true)  @endif @endforeach
+                    value="{{ $id }}" >{{ ucwords($name) }}</label>
                 @if($a%3 == 0 && $a > 0)
                    </div>
                    <div class="flex items-center justify-start gap-8 pl-8">

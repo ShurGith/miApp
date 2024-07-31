@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
 
 
 Route::get('/', function () {
@@ -31,3 +32,6 @@ Route::get('/product/show/{product}', [ProductController::class,'show'])->name('
 Route::delete('/product/delete/{product}', [ProductController::class,'destroy'])->name('product.delete');
 
 Route::get('/product/prueba/{product}', [ProductController::class,'prueba'])->name('product.prueba');
+
+Route::get('/categoria/index', [CategoriaController::class, 'index'])->name('catIndex');
+Route::put('/categoria/update', [CategoriaController::class, 'update'])->name('catUpdate');

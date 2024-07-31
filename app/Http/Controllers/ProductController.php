@@ -58,7 +58,6 @@ class ProductController extends Controller
 
            $allCatgs = Categoria::all();
            foreach($allCatgs as $allCatg){
-                $nameCatg = $allCatg->name;
                 if($nameNewCat ==  $allCatg->name){
                    $insertarCat = false;
                 }
