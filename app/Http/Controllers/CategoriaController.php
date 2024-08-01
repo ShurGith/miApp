@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
+
 use App\Models\Product;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+//use Illuminate\Support\Facades\Session;
 class CategoriaController extends Controller
 {
     public function index()
     {
         $categorias = Categoria::all();
+             $data =[
+            'imagen' =>'imagen',
+            'modal' => 'encontrado',
+            'mensaje'=> __('utiles.datoEncontrado'),
+        ];
+        session()->flash('postData', $data);
         return view('categoria.index', compact('categorias'));
     }
     public function update(Request $request)
@@ -48,13 +55,23 @@ class CategoriaController extends Controller
     }
     public function imageDelete(Request $request){
         $products = Product::where('image', $request->files_select)->get();
-        if(count($products)>0){
-            $data =[  'imagen' => $request->files_select, ];
-            session()->flash('postData', $data);
-            return redirect()->route('catIndex')->with('encontrados', 'Encontrados');
+
+        $data =[
+            'imagen' => $request->files_select,
+            'modal' => 'encontrado',
+            'mensaje'=> __('utiles.datoEncontrado'),
+        ];
+        if(count($products) < 1){
+            $data = [
+                'modal' => 'success',
+                'mensaje' => __('utiles.imgDelSuccess'),
+            ];
+            unlink(public_path('images/productos/') . $request->files_select);
+
+            //return redirect()->route('catIndex')->with('encontrados', 'Encontrados');
         }
-         unlink(public_path('images/productos/') . $request->files_select);
-        return redirect()->route('catIndex')->with('success', __('utiles.imgDelSuccess'));
+        session()->flash('postData', $data);
+        return redirect()->route('catIndex');//->with('success', $data['mesaje']);
 
     }
 

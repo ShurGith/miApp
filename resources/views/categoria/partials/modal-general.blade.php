@@ -1,8 +1,11 @@
+@props([
+    'type' => session('postData'),
+])
 
 <!-- Modal toggle -->
 <button data-modal-target="default-modal" data-modal-toggle="default-modal" id="btnModal"></button>
 <!-- Main modal -->
-<div aria-hidden="true" class="fixed left-0 right-0 top-0 z-50  h-[calc(100%-1rem)] hidden max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0" id="default-modal" tabindex="-1">
+<div aria-hidden="true" class="fixed left-0 right-0 top-0 z-50  h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0" id="default-modal" tabindex="-1">
     <div class="relative max-h-full w-full max-w-2xl p-4">
         <!-- Modal content -->
         <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
@@ -26,6 +29,8 @@
             <div class="p-8 ">
                 <p class="text-center text-xl leading-relaxed text-gray-500 dark:text-gray-400">
                     {!! session('success') !!}
+                    {{ session('postData.mensaje') }}
+
                 </p>
             </div>
             <!-- Modal footer -->

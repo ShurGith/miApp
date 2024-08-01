@@ -16,23 +16,24 @@
 @section('contenido')
 	<div class="py-2">
         @include('categoria.partials.edit-cats')
+        @include('categoria.partials.edit-files')
+        @include('categoria.partials.modal-encontrado')
+        @include('categoria.partials.modal-success')
+        @include('categoria.partials.modal-general')
 
-		@if (session()->has('success'))
+
+        @if (session()->has('success'))
         <script>
             setTimeout(() => {
                 btnModal.click()
             }, 300);
 			</script>
 		@endif
-        @if (session()->has('postData.imagen'))
+        {{-- @if (session()->has('postData.imagen'))
         <script>
             setTimeout(() => {
                 btnEncontrado.click()
             }, 300);
 			</script>
-        @endif
-
-        @include('categoria.partials.edit-files')
-        @include('categoria.partials.modal-encontrado')
-        @include('categoria.partials.modal-success')
+        @endif --}}
 	@endsection
