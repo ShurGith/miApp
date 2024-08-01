@@ -21,4 +21,5 @@
         'datoEncontrado' => 'At least one product has been found that has this image associated with it',
         'imgDelSuccess' => 'Image Successfully Deleted',
         'IgualDelete'=> 'Still delete',
+        'catIndexLink' => 'Config',
     ];

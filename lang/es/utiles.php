@@ -21,4 +21,5 @@
         'datoEncontrado' => 'Se ha encontrado, por lo menos, un producto que tiene asociada esta imagen.',
         'imgDelSuccess'=> 'Imagen Eliminada Correctamente',
         'IgualDelete'=> 'Eliminar Igualmente',
+        'catIndexLink' => 'Congfiguración',
     ];

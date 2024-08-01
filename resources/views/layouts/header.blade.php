@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>🤖 MiApp 👻 {{ isset($page_title) ? $page_title : 'Poner Titulo' }}</title>
+    <title>🤖 MiApp 👻 {{ isset($page_title) ? $page_title : '' }}</title>
 
     <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,7 +17,7 @@
 <body>
    <section class="w-full items-center">
         <header class="px-10 flex justify-center items-center gap-2 lg:grid-cols-3 w-full bg-headerBg">
-            {{-- @if (Route::has('login')) --}}
+            @if (Route::has('login'))
             <div><a href="/"><img src="{{ asset('/images/logo.svg') }}"></a></div>
             <nav class="flex w-full">
                 <ul class="flex justify-center p-6 gap-4 w-full">
@@ -38,6 +38,6 @@
                     @endauth
                 </ul>
             </nav>
-            {{-- @endif --}}
+            @endif
         </header>
     </section>
