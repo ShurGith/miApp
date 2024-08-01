@@ -28,8 +28,9 @@
             <!-- Modal body -->
             <div class="p-8 ">
                 <p class="text-center text-xl leading-relaxed text-gray-500 dark:text-gray-400">
-                    {!! session('success') !!}
+                    {{-- {!! session('success') !!} --}}
                     {{ session('postData.mensaje') }}
+                    {{-- {{ session('postData.show') }} --}}
 
                 </p>
             </div>
@@ -38,6 +39,9 @@
                 <button class="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-modal-hide="default-modal" type="button">
                     {{ __('Accept') }}
                 </button>
+             @if(session('postData.show'))
+                @include('categoria.partials.boton-form')
+             @endif
             </div>
         </div>
     </div>

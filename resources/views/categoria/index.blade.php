@@ -3,6 +3,8 @@
     'page_create' => true,
     'dashboard' => true,
     'page_title' => __('utiles.EditCategs'),
+    'modal' => session('postData.modal'),
+    'saludo' => session('postData.saludo')
 ])
 
 @extends('dashboard')
@@ -17,23 +19,20 @@
 	<div class="py-2">
         @include('categoria.partials.edit-cats')
         @include('categoria.partials.edit-files')
-        @include('categoria.partials.modal-encontrado')
-        @include('categoria.partials.modal-success')
-        @include('categoria.partials.modal-general')
 
-
-        @if (session()->has('success'))
-        <script>
-            setTimeout(() => {
-                btnModal.click()
-            }, 300);
-			</script>
-		@endif
-        {{-- @if (session()->has('postData.imagen'))
-        <script>
-            setTimeout(() => {
-                btnEncontrado.click()
-            }, 300);
-			</script>
-        @endif --}}
-	@endsection
+        @if(isset($modal))
+             @include('categoria.partials.modal-'.$modal)
+             <script>
+                setTimeout(() => {
+                    btnModal.click()
+                }, 200);
+                window.onload=()=>{
+                var pos=window.name || 0;
+                window.scrollTo(0,pos);
+                }
+                window.beforeunload= ()=>{
+                    window.name=self.scrollY || (document.documentElement.scrollTop+document.body.scrollTop);
+                }
+            </script>
+        @endif
+@endsection

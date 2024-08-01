@@ -8,11 +8,11 @@
         <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="bg-success gap-6 flex items-center justify-between rounded-t border-b p-2 pl-10 dark:border-gray-600 ">
-                <svg xmlns="http://www.w3.org/2000/svg" class="" icon icon-tabler icon-tabler-thumb-up" width="52" height="52" viewBox="0 0 24 24" stroke-width="1" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="" icon icon-tabler icon-tabler-thumb-up" width="52" height="52" viewBox="0 0 24 24" stroke-width="1" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3" />
                   </svg>
-                <h3 class="text-lg text-gray-600 dark:text-white">
+                <h3 class="text-lg text-white">
                     {{ __('utiles.infoAcction') }}
                 </h3>
                 <button class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal" type="button">
@@ -25,7 +25,8 @@
             <!-- Modal body -->
             <div class="p-8 ">
                 <p class="text-center text-xl leading-relaxed text-gray-500 dark:text-gray-400">
-                    {!! session('success') !!}
+                    {{-- {!! session('success') !!} --}}
+                    {!! session('postData.mensaje') !!}
                 </p>
             </div>
             <!-- Modal footer -->

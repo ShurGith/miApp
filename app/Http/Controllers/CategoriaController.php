@@ -13,12 +13,6 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-             $data =[
-            'imagen' =>'imagen',
-            'modal' => 'encontrado',
-            'mensaje'=> __('utiles.datoEncontrado'),
-        ];
-        session()->flash('postData', $data);
         return view('categoria.index', compact('categorias'));
     }
     public function update(Request $request)
@@ -50,8 +44,14 @@ class CategoriaController extends Controller
         }elseif(!isset($mensajeAdd) && $count == 0){
             $delMsj = __('utiles.categNoChanges');
         }
-        return redirect()->route('catIndex')
-            ->with('success', $addMsj . $delMsj);
+
+        $data =[
+            'imagen' => $request->files_select,
+            'modal' => 'success',
+            'mensaje'=> $addMsj . $delMsj,
+        ];
+        session()->flash('postData', $data);
+        return redirect()->route('catIndex');
     }
     public function imageDelete(Request $request){
         $products = Product::where('image', $request->files_select)->get();
@@ -76,15 +76,25 @@ class CategoriaController extends Controller
     }
 
     public function imgDelSeg(Request $request){
+        $data = [
+            'modal' => 'success',
+            'mensaje' => __('utiles.imgDelSuccess'),
+        ];
+        session()->flash('postData', $data);
         unlink(public_path('images/productos/') . $request->archivo);
-         return redirect()->route('catIndex')->with('success', __('utiles.imgDelSuccess'));
+         return redirect()->route('catIndex');
     }
     public function imageUpload(Request $request){
         $pretime = "xy_".substr(time(), -5);
         $prename = substr($request->file_subida->getClientOriginalName(),-10);
         $fileName = $pretime. '_'. $prename;
         $request->file_subida->move(public_path('images/productos'), $fileName);
-       return redirect()->route('catIndex')->with('success',__('utiles.uploadedImage'));
+        $data = [
+            'modal' => 'success',
+            'mensaje' => __('utiles.uploadedImage'),
+        ];
+        session()->flash('postData', $data);
+       return redirect()->route('catIndex');
     }
 
 
