@@ -30,6 +30,7 @@
 		</div>
         <div class="flex gap-10 w-full justify-evenly pt-10">
             <div>
+            @auth
                 <h3>En catálogo desde:</h3>
                 <h2>{{ $product->created_at->format('d-m-Y') }}</h2>
                 @if ($product->created_at->format('d-m-Y')  == $product->updated_at->format('d-m-Y'))
@@ -37,12 +38,15 @@
                 @else
                     <p>Ha sido modificado el {{ $product->updated_at->format('d-m-Y') }}</p>
                 @endif
+            @endauth
             </div>
 				<div alt="{{ $product->name }}" class="h-80 w-80 rounded-md border bg-contain bg-no-repeat"
 					style="background-image: url({{ asset('images/productos/' . $product->image) }})"></div>
 			</div>
 		  <div class="w-full flex justify-center items-center pt-12">
-			<a class="rounded-md bg-blue-600 px-4 py-2 text-base text-white boton-editar" href="{{ route('product.edit', $product) }}">Editar {{ $product->name }}</a>
+		  @auth
+              <a class="rounded-md bg-blue-600 px-4 py-2 text-base text-white boton-editar" href="{{ route('product.edit', $product) }}">Editar {{ $product->name }}</a>
+		  @endauth
 		</div>
 	</div>
 

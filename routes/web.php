@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CategoriaController;
 
 Route::get('/', function () {
@@ -23,17 +25,23 @@ require __DIR__.'/auth.php';
 
 Route::get('/product/main', [ProductController::class, 'main'])->name('product.main');
 Route::get('/product/index', [ProductController::class, 'index'])->name('product.index');
-Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('/product/store', [ProductController::class,'store'])->name('product.store');
-Route::get('/product/edit/{product}', [ProductController::class,'edit'])->name('product.edit');
-Route::put('/product/update/{product}', [ProductController::class,'update'])->name('product.update');
-Route::get('/product/show/{product}', [ProductController::class,'show'])->name('product.show');
-Route::delete('/product/delete/{product}', [ProductController::class,'destroy'])->name('product.delete');
+Route::get('show/{product}', [ProductController::class,'show'])->name('product.show');
+Route::group(['prefix' => 'product', 'middleware' => ['auth']], function(){
+    Route::get('create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('store', [ProductController::class,'store'])->name('product.store');
+    Route::get('edit/{product}', [ProductController::class,'edit'])->name('product.edit');
+    Route::put('update/{product}', [ProductController::class,'update'])->name('product.update');
+    Route::delete('delete/{product}', [ProductController::class,'destroy'])->name('product.delete');
+});
 
 Route::get('/product/prueba/{product}', [ProductController::class,'prueba'])->name('product.prueba');
+Route::group(['prefix' => 'categoria', 'middleware' => ['auth']], function(){
+    Route::get('/index', [CategoriaController::class, 'index'])->name('catIndex');
+    Route::put('update', [CategoriaController::class, 'update'])->name('catUpdate');
+    Route::put('imagedelete', [CategoriaController::class, 'imageDelete'])->name('imageDelete');
+    Route::put('imageupload', [CategoriaController::class, 'imageUpload'])->name('imageUpload');
+    Route::put('imgDelSeg', [CategoriaController::class, 'imgDelSeg'])->name('imgDelSeg');
+});
 
-Route::get('/categoria/index', [CategoriaController::class, 'index'])->name('catIndex');
-Route::put('/categoria/update', [CategoriaController::class, 'update'])->name('catUpdate');
-Route::put('/categoria/imagedelete', [CategoriaController::class, 'imageDelete'])->name('imageDelete');
-Route::put('/categoria/imageupload', [CategoriaController::class, 'imageUpload'])->name('imageUpload');
-Route::put('/categoria/imgDelSeg', [CategoriaController::class, 'imgDelSeg'])->name('imgDelSeg');
+Route::get('/lang/{lang}', [LanguageController::class, 'switch'])->name('lang');
+Route::get('/theme/{theme}', [ThemeController::class, 'switch'])->name('theme');

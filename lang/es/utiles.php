@@ -22,4 +22,7 @@
         'imgDelSuccess'=> 'Imagen Eliminada Correctamente',
         'IgualDelete'=> 'Eliminar Igualmente',
         'catIndexLink' => 'Congfiguración',
+        'newProd'  => 'Nuevo Producto',
+        'catalog'  => 'Catálogo',
+        'theme'  => 'Tema',
     ];

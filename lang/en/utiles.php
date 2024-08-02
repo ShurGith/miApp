@@ -22,4 +22,7 @@
         'imgDelSuccess' => 'Image Successfully Deleted',
         'IgualDelete'=> 'Still delete',
         'catIndexLink' => 'Config',
+        'newProd' => 'Nuevo Product',
+        'catalog' => 'Catalog',
+        'theme' => 'Theme',
     ];

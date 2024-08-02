@@ -3,6 +3,7 @@
     'active' => false,
     'page_create' =>true,
 ])
+
 @extends('product.main')
 
 @include('product.partials.edit-create')

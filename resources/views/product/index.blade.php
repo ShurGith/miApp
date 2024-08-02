@@ -39,8 +39,10 @@ function acortar($text){
 					<td>
 						<div class=" flex gap-1 pr-2">
 							<a class="max-w-40 rounded-md bg-blue-600 px-4 py-2 text-sm text-white boton-editar" href="{{ route('product.show', $product) }}">Ver</a>
+							@auth
 							<a class="max-w-40 rounded-md bg-blue-600 px-4 py-2 text-sm text-white boton-editar" href="{{ route('product.edit', $product) }}">Editar</a>
 							<button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="max-w-40 rounded-md bg-red-600 px-4 py-2 text-sm text-white boton-eliminar">Eliminar</button>
+                            @endauth
 						</div>
 					</td>
 				</tr>
