@@ -36,7 +36,7 @@ Route::group(['prefix' => 'product', 'middleware' => ['auth']], function(){
 
 Route::get('/product/prueba/{product}', [ProductController::class,'prueba'])->name('product.prueba');
 Route::group(['prefix' => 'categoria', 'middleware' => ['auth']], function(){
-    Route::get('/index', [CategoriaController::class, 'index'])->name('catIndex');
+    Route::get('index', [CategoriaController::class, 'index'])->name('catIndex');
     Route::put('update', [CategoriaController::class, 'update'])->name('catUpdate');
     Route::put('imagedelete', [CategoriaController::class, 'imageDelete'])->name('imageDelete');
     Route::put('imageupload', [CategoriaController::class, 'imageUpload'])->name('imageUpload');

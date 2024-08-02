@@ -1,4 +1,5 @@
 @props([
+    //Your Themes in array
     'themes'=> [
         "oxygen",
         "light",
