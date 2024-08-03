@@ -29,7 +29,7 @@ export default {
         themes: [
             {
                 oxygen: {
-                    primary: "#003fff",
+                    primary: "#ff6f0f",
                     secondary: "#3b00ff",
                     accent: "#007196",
                     neutral: "#00101c",
