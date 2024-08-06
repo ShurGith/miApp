@@ -43,5 +43,5 @@ Route::group(['prefix' => 'categoria', 'middleware' => ['auth']], function(){
     Route::put('imgDelSeg', [CategoriaController::class, 'imgDelSeg'])->name('imgDelSeg');
 });
 
-Route::get('/lang/{lang}', [LanguageController::class, 'switch'])->name('lang');
+Route::get('/lang/{lang}', [LanguageController::class, 'switch'])->name('languaje');
 Route::get('/theme/{theme}', [ThemeController::class, 'switch'])->name('theme');
