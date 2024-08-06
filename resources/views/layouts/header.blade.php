@@ -65,8 +65,8 @@
 						@endauth
 					</div>
 					<div class="flex gap-2">
-						<li class="nav-item"><a href="{{ route('lang', 'en') }}"><x-flag-country-us class="w-6 h-6" /></a></li>
-						<li class="nav-item"><a href="{{ route('lang', 'es') }}"><x-flag-country-es class="w-6 h-6" /></a></li>
+						<li class="nav-item"><a href="{{ route('lang', 'en') }}"><img src="{{ asset('vendor/blade-flags/language-en.svg') }}" class="w-6 h-6"></a></li>
+						<li class="nav-item"><a href="{{ route('lang', 'es') }}"><img src="{{ asset('vendor/blade-flags/language-es.svg') }}" class="w-6 h-6"></a></li>
 					</div>
 				</ul>
 			</nav>
