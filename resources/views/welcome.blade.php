@@ -1,5 +1,5 @@
 @include('layouts.header')
-<main class="relative p-5 bg-no-repeat bg-cover lg:h-full" style="background-image:url({{ asset('images/bg_4.jpg') }})">
+<main class="flex flex-col bg-no-repeat bg-cover" style="background-image:url({{ asset('images/bg_4.jpg') }})">
 	<section class="relative p-5 bg-cover lg:h-full">
 		<div class="relative z-0 w-full h-full pt-24 pb-12 overflow-hidden bg-center bg-cover rounded-3xl"
 			style="background-image: url(https://pagedone.io/asset/uploads/1710221348.png);">
@@ -724,7 +724,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="relative p-5 bg-cover lg:h-full">
+	<section class="p-5 bg-cover lg:h-full">
 		<div class="relative z-0 p-24 overflow-hidden bg-cover rounded-3xl bg-[url('https://www.material-tailwind.com/image/gradient-bg.png')] bg-no-repeat">
 			<p class="block font-sans text-sm antialiased font-light leading-normal text-white">
 				Upcoming Events
@@ -743,7 +743,7 @@
 			</button>
 		</div>
 	</section>
-    <section class="relative py-5 pb-8 lg:pt-0">
+    <section class="py-5 pb-8 lg:pt-0">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="grid items-center h-auto grid-cols-1 gap-6 lg:grid-cols-12 xl:gap-24 lg:gap-16 lg:h-full">
           <div class="w-full pb-12 lg:col-span-6 lg:pb-0 md:order-first">

@@ -14,9 +14,9 @@ function acortar($text){
 @endphp
 @extends('product.main')
 @section('contenido')
-	<div class="relative w-8/12 min-h-screen overflow-x-auto text-white shadow-md sm:rounded-lg">
-		<table class="w-full text-left text-sm text-blue-100 rtl:text-right dark:text-blue-100">
-			<thead class="border-b border-gray-400 bg-gray-600 text-xs uppercase text-white dark:text-white">
+	<div class="relative w-8/12 text-white shadow-md sm:rounded-lg">
+		<table class="w-full text-sm text-left text-blue-100 rtl:text-right dark:text-blue-100">
+			<thead class="text-xs text-white uppercase bg-gray-600 border-b border-gray-400 dark:text-white">
 				<tr>
 					<th class="px-6 py-3" scope="col">Imagen</th>
 					<th class="px-6 py-3" scope="col">Nombre</th>
@@ -37,22 +37,22 @@ function acortar($text){
 					<td  class="px-6 py-3">{{ acortar($product->description) }}</td>
 					<td  class="px-6 py-3">{{ $product->price }} <sup class="span-euro">€</sup></td>
 					<td>
-						<div class=" flex gap-1 pr-2">
-							<a class="max-w-40 rounded-md bg-blue-600 px-4 py-2 text-sm text-white boton-editar" href="{{ route('product.show', $product) }}">Ver</a>
+						<div class="flex gap-1 pr-2 ">
+							<a class="px-4 py-2 text-sm text-white bg-blue-600 rounded-md max-w-40 boton-editar" href="{{ route('product.show', $product) }}">Ver</a>
 							@auth
-							<a class="max-w-40 rounded-md bg-blue-600 px-4 py-2 text-sm text-white boton-editar" href="{{ route('product.edit', $product) }}">Editar</a>
-							<button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="max-w-40 rounded-md bg-red-600 px-4 py-2 text-sm text-white boton-eliminar">Eliminar</button>
+							<a class="px-4 py-2 text-sm text-white bg-blue-600 rounded-md max-w-40 boton-editar" href="{{ route('product.edit', $product) }}">Editar</a>
+							<button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="px-4 py-2 text-sm text-white bg-red-600 rounded-md max-w-40 boton-eliminar">Eliminar</button>
                             @endauth
 						</div>
 					</td>
 				</tr>
 			@empty
-			   <th class="text-center w-full text-6xl text-blue-500">Aun no tenemos datos para mostrar</th>
+			   <th class="w-full text-6xl text-center text-blue-500">Aun no tenemos datos para mostrar</th>
 			@endforelse
 		</table>
 	</div>
 <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full">
+    <div class="relative w-full max-w-md max-h-full p-4">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -60,8 +60,8 @@ function acortar($text){
                 </svg>
                 <span class="sr-only">Close modal</span>
             </button>
-            <div class="p-4 md:p-5 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <div class="p-4 text-center md:p-5">
+                <svg class="w-12 h-12 mx-auto mb-4 text-gray-400 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                 </svg>
                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">¿Ultimo paso para proceder al eliminado de este producto?</h3>

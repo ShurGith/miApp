@@ -1,11 +1,21 @@
 <?php
 
+use App\Mail\JobPosted;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CategoriaController;
+
+
+Route::get('/testo', function(){
+   Mail::to('esnola@gnedsaa.es')->send(new JobPosted());
+   return  'Done';
+
+});
+
 
 Route::get('/', function () {
     return view('welcome');

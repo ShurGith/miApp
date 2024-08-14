@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ Session::get('themeLocal') }}">
+<html  lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ Session::get('themeLocal') }}">
 
 <head>
 	<meta charset="utf-8">
@@ -17,7 +17,8 @@
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body style="display:grid; grid-template-rows:auto 1fr auto; min-height:100vh">
+{{-- <body style="display: flex; flex-direction:column; min-height:100%"> --}}
 	<section class="items-center w-full">
 		<header class="flex items-center justify-between w-full gap-2 px-10 bg-headerBg lg:grid-cols-3">
 			<div class="flex gap-10 pl-10 ">
